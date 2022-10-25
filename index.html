@@ -1,0 +1,19 @@
+<html>
+	<head>
+		<script type="text/javascript">
+			window.open ("popup.html","mywindow", "width=350,height=250");
+			var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
+			var eventer = window[eventMethod];
+			var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
+			eventer(messageEvent,function(e) {
+				console.log('origin: ', e.origin)
+				if( e.origin != 'http://localhost:8080' ){ return }
+				//if( e.origin != '*' ){ return }
+				console.log('parent received message!: ', e.data);
+				alert(e.data);
+			}, false);
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
